@@ -1,0 +1,21 @@
+.header {
+  padding: 1.2em;
+  background-color: #0066cc;
+}
+.content-box {
+  padding: 10px;
+  background-color: #ccccff;
+  background-clip: content-box; /* 仅内容区域着色 */
+  width: 400px;
+  border: 2px solid #333399;
+}
+
+.border-box {
+  background-color: #ccccff;
+  background-clip: content-box; /* 仅内容区域着色 */
+
+  padding: 10px;
+  box-sizing: border-box;
+  width: 400px;
+  border: 2px solid #333399;
+}

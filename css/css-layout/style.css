@@ -1,0 +1,11 @@
+.parent {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  height: 100vh; /* 为了示例效果，父元素设置全屏高度 */
+}
+.child {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
