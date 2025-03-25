@@ -25,29 +25,39 @@ createBooking('LH123', 2);
 createBooking('LH123', 2, 200);
 createBooking('LH123', undefined, 1000);
 
-
 /**
  * 参数传递
  * 原始类型传递值
  * 引用类型传递引用的地址值
  */
-const flight = "1";
+const flight = '1';
 const Jin = {
-  name: "jin",
-  passport : 123
-}
-const checkIn = function(flightNum, passenger){
+  name: 'jin',
+  passport: 123
+};
+const checkIn = function (flightNum, passenger) {
   flightNum = '2';
-  passenger.name = 'Mr' + passenger.name 
-  if(passenger.passport === 123){
-    alert("check in");
-  }else {
-    alert("wrong passport")
+  passenger.name = 'Mr' + passenger.name;
+  if (passenger.passport === 123) {
+    alert('check in');
+  } else {
+    alert('wrong passport');
   }
-}
+};
 const newPassport = function (person) {
-  person.passport = Math.trunc(Math.random() * 1e9)
+  person.passport = Math.trunc(Math.random() * 1e9);
+};
+checkIn(flight, Jin);
+console.log(flight);
+console.log(Jin);
+
+/**
+ * 函数对象的方法
+ */
+function sum(num1, num2) {
+  return num1 + num2;
 }
-checkIn(flight, Jin)
-console.log(flight)
-console.log(Jin)
+
+function callSum(num1, num2) {
+  return sum.call();
+}

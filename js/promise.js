@@ -36,3 +36,27 @@ const getCountryData = function (country) {
 };
 
 getCountryData('portugal');
+
+/**
+ * 一个promise例子
+ */
+const isPregnant = true;
+// const isPregnant = false;
+const promise1 = new Promise((resolve, reject) => {
+  if(isPregnant) {
+    resolve(`孩子爹`)
+  }else {
+    reject(`老公`)
+  }
+})
+
+promise
+  .then(name => {
+    console.log(`男人成为了${name}`)
+  })
+  .catch(name => {
+    console.log(`男人成为了${name}`)
+  })
+  .finally(() => {
+    console.log(`最终`)
+  })
