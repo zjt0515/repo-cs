@@ -18,7 +18,7 @@ xhr.onreadystatechange = function () {
     } else {
       alert(xhr.status);
     }
-  }
+  }         ,
 };
 
 /**

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const bookings = [];
 
@@ -14,34 +14,34 @@ const createBooking = function (
   const booking = {
     flightNum,
     numPassengers,
-    price
+    price,
   };
   console.log(booking);
   bookings.push(booking);
 };
 // 没有传递的参数，默认为undefined
-createBooking('LH123');
-createBooking('LH123', 2);
-createBooking('LH123', 2, 200);
-createBooking('LH123', undefined, 1000);
+createBooking("LH123");
+createBooking("LH123", 2);
+createBooking("LH123", 2, 200);
+createBooking("LH123", undefined, 1000);
 
 /**
  * 参数传递
  * 原始类型传递值
  * 引用类型传递引用的地址值
  */
-const flight = '1';
+const flight = "1";
 const Jin = {
-  name: 'jin',
-  passport: 123
+  name: "jin",
+  passport: 123,
 };
 const checkIn = function (flightNum, passenger) {
-  flightNum = '2';
-  passenger.name = 'Mr' + passenger.name;
+  flightNum = "2";
+  passenger.name = "Mr" + passenger.name;
   if (passenger.passport === 123) {
-    alert('check in');
+    alert("check in");
   } else {
-    alert('wrong passport');
+    alert("wrong passport");
   }
 };
 const newPassport = function (person) {
@@ -60,4 +60,10 @@ function sum(num1, num2) {
 
 function callSum(num1, num2) {
   return sum.call();
+}
+
+// 函数可以捕获函数体外部变量
+let z = 1;
+function addToZ(a) {
+  return a + z;
 }
