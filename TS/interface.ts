@@ -8,7 +8,6 @@ interface Point {
     readonly id: number
     x:number
     y:number
-
 }
 declare const MyPoint: Point
 // 重名接口合并
