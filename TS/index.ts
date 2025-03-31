@@ -75,3 +75,20 @@ function useDataFlow(dataFlow: DataFlow) {
   }
 }
 
+/**
+ * 合成类型
+ */
+
+// 联合类型
+let StrOrNum: string | number = 'str'
+StrOrNum = 1
+console.log(StrOrNum) 
+// 交叉类型
+let obj: {username:string} & {age:number} = { username: 'zjt', age: 18 } 
+console.log(obj)   
+
+/**
+ * 字面量数据类型
+ */
+type A = 1 | 2 | 3 | 4 | 5
+let num: A = 2
