@@ -28,6 +28,10 @@ enum StringDirection {
     UP = 'UP',
     DOWN = 'DOWN',
 }
+// 字符串取值
+StringDirection.UP
+StringDirection["DOWN"]
+// 字符串枚举，没有反向取值
 
 /**
  * const枚举
@@ -39,7 +43,7 @@ const enum ConstEnmu {
 
 
 /**
- * 接口枚举
+ * 接口中使用枚举
  */
 interface Place {
     direction: Direction
@@ -50,6 +54,7 @@ let classromm:Place = {
 }
 
 /**
+ * 数字枚举
  * 反向映射 value -> key
  */
 enum Type {
@@ -58,3 +63,7 @@ enum Type {
 }
 let key = Type[0]
 console.log(typeof key+ ":" +key)
+
+/**
+ * enum底层
+ */

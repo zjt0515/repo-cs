@@ -7,5 +7,7 @@ const minus = (a, b) => a - b;
 const multi = function (a, b) {
     return a + b;
 };
-() => {
-};
+function subInfo({ name }) {
+    console.log(name);
+}
+subInfo({ name: "zjt", age: 12 });

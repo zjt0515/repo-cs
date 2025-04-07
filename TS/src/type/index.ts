@@ -4,6 +4,10 @@
 // npm init -y
 // tsc -w 编译为js npm i @types/node -D
 // ts-node index.ts 直接调试
+
+/**
+ * 基本类型
+ */
 let myName: string = 'zjt'
 new Set<string>()
 console.log(myName)
@@ -19,7 +23,17 @@ let bool: boolean = true
 let list: number[] = [1,2,3]
 let list2: Array<number> = [1, 2]
 // void, null, undefined
-let n:void = null
+// let n:void = null
+
+// undefined
+let canEqualUndefined1: any = undefined
+let canEqualUndefined2: undefined = undefined
+let canEqualUndefined3: unknown = undefined
+
+// null
+let canEqualNull1: any = null
+let canEqualNull2: null = null
+let canEqualNull3: unknown = null
 
 /**
  * 顶级类型 any, unknown更安全
@@ -55,15 +69,27 @@ let o: object = [1,2,3]
  * number string
  */
 
-/**
- * 1, 'str', false
- */
 
 /**
- * never
+ * 特殊类型
  */
-type DataFlow = string | number 
-function useDataFlow(dataFlow: DataFlow) {
+// tuple
+console.log("=========tuple=========")
+let salary: [string, number, number, number] = ["zjt", 10000,5000, 15000]
+
+// 可变tuple
+let salary2: [string, number, ...any[]] = ["zjt", 1, 1,1,1,1,1,1]
+// 解构
+let [name3, nuber1, ...rest] = salary2
+// 元祖标签tag
+console.log(salary2[0])
+let tagedTuple: [name:string, salary1: number, salary2: number]
+= ["zjt", 111, 222]
+
+
+// nerver
+type DataFlowType = string | number 
+function useDataFlow(dataFlow: DataFlowType) {
   if(typeof dataFlow === "string" ) {
     dataFlow.length
   } else if(typeof dataFlow === "number") {
@@ -92,3 +118,16 @@ console.log(obj)
  */
 type A = 1 | 2 | 3 | 4 | 5
 let num: A = 2
+
+/**
+ * 经典报错
+ */
+// 不能使用 不固定的索引值
+let user = {name: 'zjt'}
+// let need = 'name'
+const need = 'name'
+let username = user[need]
+
+// object类型不能使用常量索引
+let objtest:object = {name : 'zjt'}
+// let username2 = objtest[need]

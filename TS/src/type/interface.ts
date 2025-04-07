@@ -76,3 +76,47 @@ class LinkedList implements List {
         throw new Error("Method not implemented.")
     }
 }
+
+
+
+
+/**
+ * 可索引签名
+ */
+interface MyProduct {
+    name:string
+    price:number
+    sell(): number
+
+    // 不确定数量，不确定名称的属性
+
+    // string/symbol类型支持所有类型的属性名
+    [x: string]: any
+    // [x: symbol]: any
+    // number只支持number
+    // [x: number]: any
+
+    // 如果定义了可索引签名值的类型，则必须能够兼容前面所有值的类型
+    // [x: string]: number
+}
+
+let p: MyProduct = {
+    name: '绯红列赞',
+    price: 1078,
+    account: 200,
+    sell: function(){
+        return 10
+    },
+    // 测试string
+    [Symbol("stockno")]: 400,
+    100: 300,
+    true: "ok"
+}
+
+/**
+ * 利用索引获取接口属性值的类型
+ */
+
+type NameType = MyProduct["name"]
+type PriceType = MyProduct["price"]
+type NameAndPriceType = MyProduct["name" | "price"]
