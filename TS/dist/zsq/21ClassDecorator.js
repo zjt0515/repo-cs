@@ -8,13 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-function FirstClassDecorator(params) {
-    return function (targetClass) {
-        var targetClassObj = new targetClass();
-        targetClassObj.buy();
-        console.log("targetClass.name: ", targetClass.name);
-    };
+/**
+ * 不带参数的装饰器
+ * @param targetClass
+ */
+function FirstClassDecorator(targetClass) {
+    var targetClassObj = new targetClass();
+    targetClassObj.buy();
+    console.log("targetClass.name: ", targetClass.name);
 }
 var CustomerService = /** @class */ (function () {
     function CustomerService() {
@@ -27,7 +28,7 @@ var CustomerService = /** @class */ (function () {
         console.log(this.name + "下单购买");
     };
     CustomerService = __decorate([
-        FirstClassDecorator(""),
+        FirstClassDecorator,
         __metadata("design:paramtypes", [])
     ], CustomerService);
     return CustomerService;
