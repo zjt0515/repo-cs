@@ -27,8 +27,8 @@ export class UserController {
 
   @Get()
   findAll() {
-    const db: string | undefined = this.configService.get(ConfigEnum.DB_PORT);
-    console.log('dbport:', db);
+    const db: string | undefined = this.configService.get('db');
+    console.log('db:', db);
     return this.userService.findAll();
   }
 
