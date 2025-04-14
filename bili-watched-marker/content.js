@@ -60,7 +60,7 @@ function listenForVideoEnd() {
     if (epId) {
       addWatchedEp(epId);
     }
-    highlightWatchedEps();
+    setTimeout(updateWatchedPanel, 1500)
   });
 }
 
@@ -87,26 +87,24 @@ function listenForVideoEnd() {
 //     });
 //   });
 // }
-function highlightWatchedEps() {
-  const bv = getBvIdFromUrl()
-  chrome.storage.local.get(["watched"], (res)=> {
-    const eps = res.watched || [];
-    console.log(`获取到已完成的ep: ${eps}`)
+// function highlightWatchedEps() {
+//   const bv = getBvIdFromUrl()
+//   chrome.storage.local.get(["watched"], (res)=> {
+//     const eps = res.watched || [];
+//     console.log(`获取到已完成的ep: ${eps}`)
 
-    const episodeList = document.querySelector(".video-pod__list.multip.list");
-    if (!episodeList) return;
+//     const episodeList = document.querySelector(".video-pod__list.multip.list");
+//     if (!episodeList) return;
 
-    const items = episodeList.children;
-    for (let item of items) {
-      const key = item.getAttribute("data-key");
-      if (eps.has(key)) {
-        item.style.color = "green";
-      }
-    }
-  })
-
-  
-}
+//     const items = episodeList.children;
+//     for (let item of items) {
+//       const key = item.getAttribute("data-key");
+//       if (eps.has(key)) {
+//         item.style.color = "green";
+//       }
+//     }
+//   })
+// }
 
 function createWatchedListPanel() {
   const toggleBtn = document.createElement("button");
@@ -148,26 +146,42 @@ function createWatchedListPanel() {
 
   updateWatchedPanel();
 }
+// 标记为已观看，并跳转到下一个视频
+function markAsWatchedAndNext() {
+  
+}
 
+/**
+ * 更新已观看列表
+ */
 function updateWatchedPanel() {
   chrome.storage.local.get(["watched"], (res) => {
     const watched = res.watched || [];
     const panel = document.getElementById("watched-panel");
     panel.innerHTML = "<strong>✔ 已观看集数</strong><ul style='padding-left: 16px;'>";
-
-    watched.forEach((epId) => {
-      const a = document.querySelector(``);
-      const title = a?.innerText || epId;
-      panel.innerHTML += `<li>${title}</li>`;
-    });
-
+    const AllEPNodeList = document.querySelector(`.video-pod__list`).children;
+    console.log("ceshi")
+    for (const element of AllEPNodeList) {
+      const datakey = element.getAttribute("data-key");
+      console.log(datakey)
+      if(watched.includes(datakey)){
+        const title = element.textContent
+        panel.innerHTML += `<li>${title}</li>`;
+        element.children[0].children[1].style.color = "green"
+      }
+    }
     panel.innerHTML += "</ul>";
   });
 }
 
+function test() {
+ 
+}
 // 初始化
 listenForVideoEnd();
 setTimeout(() => {
-  highlightWatchedEps()
   createWatchedListPanel();
+  updateWatchedPanel()
 }, 1500);
+
+test()
