@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import type { MenuItem } from '@/components/types/SiderbarNav';
 
-export const useMenusStore = defineStore('menus', () => {
+export const useMenusStore = defineStore('menus', {
   state: () => ({
     menus: [
       {
@@ -19,11 +19,6 @@ export const useMenusStore = defineStore('menus', () => {
         name: '角色管理',
         routeName: 'roles',
       },
-      {
-        id: 4,
-        name: '首页',
-        routeName: 'dashboard',
-      },
     ] as Array<MenuItem>,
-  });
+  }),
 });
