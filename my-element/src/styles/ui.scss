@@ -1,0 +1,12 @@
+// 修改组件库内部样式
+// 1. 自定义类名空间
+// 2. 浏览器中调试样式
+// 3. 粘贴
+// 4. 在app中引入
+// 5. 组件内需要改央视的元素的父元素加上该类名
+.m--choose-icon-dialog-body-height {
+  .el-dialog__body {
+    height: 800px;
+    overflow: scroll;
+  }
+}
