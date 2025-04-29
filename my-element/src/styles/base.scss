@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+svg {
+  width: 1em;
+  height: 1em;
+}
+
+// 撑满整个高度
+// 外部所有标签高度都设置为100%
+html,
+body,
+#app,
+.el-container,
+.el-menu {
+  height: 100%;
+}
