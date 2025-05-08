@@ -2,9 +2,13 @@
 <template>
   <div class="music-list">
     <!-- 返回按钮 -->
-    <div class="back">
-      <div class="icon-back"></div>
+    <div
+      class="back"
+      @click="goBack"
+    >
+      <i class="icon-back"></i>
     </div>
+    <!-- 标题 -->
     <h1 class="title">{{ props.title }}</h1>
     <!-- 背景图片 -->
     <div
@@ -12,6 +16,7 @@
       :style="bgImageStyle"
       ref="bgImage"
     >
+      <!-- 播放按钮 -->
       <div
         class="play-btn-wrapper"
         :style="playBtnStyle"
@@ -25,6 +30,8 @@
           <span class="text">随机播放全部</span>
         </div>
       </div>
+
+      <!-- 图片模糊层 -->
       <div
         class="filter"
         :style="filterStyle"
@@ -33,6 +40,8 @@
     <!-- 歌曲滚动条 -->
     <Scroll
       class="list"
+      :style="scrollStyle"
+      :probe-type="3"
       @scroll="onScroll"
     >
       <div class="song-list-wrapper">
@@ -45,8 +54,9 @@
 <script setup>
 import SongList from '@/components/base/song-list/song-list'
 import Scroll from '@/components/base/scroll/scroll'
+import { defineProps, computed, ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
-import { defineProps, computed } from 'vue'
 const props = defineProps({
   songs: {
     type: Array,
@@ -58,9 +68,74 @@ const props = defineProps({
   pic: String
 })
 
-// 图片bgImage动态属性
+const scrollY = ref(0)
+const imageHeight = ref(0)
+const bgImage = ref(null)
+const router = useRouter()
+//
+const RESERVED_HEIGHT = 40
+// 最大滚动距离
+const maxTranslateY = ref(0)
+
+const scrollStyle = computed(() => {
+  return { top: `${imageHeight.value}px` }
+})
 const bgImageStyle = computed(() => {
-  return { backgroundImage: `url(${props.pic})` }
+  const currentScrollY = scrollY.value
+  let zIndex = 0
+  let paddingTop = '70%'
+  let height = 0
+  // iphone兼容
+  let translateZ = 0
+
+  if (currentScrollY > maxTranslateY.value) {
+    zIndex = 10
+    paddingTop = 0
+    height = `${RESERVED_HEIGHT}px`
+    translateZ = 1
+  }
+
+  // 下拉放大效果
+  let scale = 1
+  if (currentScrollY < 0) {
+    scale = 1 + Math.abs(currentScrollY / imageHeight.value)
+  }
+
+  return {
+    zIndex,
+    paddingTop,
+    height,
+    backgroundImage: `url(${props.pic})`,
+    transform: `scale(${scale})translateZ(${translateZ}px)`
+  }
+})
+
+const filterStyle = computed(() => {
+  let blur = 0
+  const currentScrollY = scrollY.value
+  const currentImageHeight = imageHeight.value
+  if (currentScrollY >= 0) {
+    blur = Math.min(maxTranslateY.value / currentImageHeight, currentScrollY / currentImageHeight) * 20
+  }
+  return {
+    backdropFilter: `blur(${blur}px)`
+  }
+})
+
+const playBtnStyle = computed(() => {
+  return {}
+})
+
+function onScroll(pos) {
+  scrollY.value = -pos.y
+}
+function goBack() {
+  router.back()
+}
+
+onMounted(() => {
+  imageHeight.value = bgImage.value.clientHeight
+  maxTranslateY.value = imageHeight.value - RESERVED_HEIGHT
 })
 </script>
 

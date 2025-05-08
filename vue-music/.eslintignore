@@ -1,1 +1,4 @@
 backend/sign.js
+README.md
+dist/*
+public/*.js

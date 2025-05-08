@@ -1,5 +1,6 @@
 <template>
-  <div class="topListView">排行榜</div>
+  <div class="topListView">
+  </div>
 </template>
 <script setup></script>
 <style lang="scss" scoped></style>
