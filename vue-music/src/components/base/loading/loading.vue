@@ -1,3 +1,4 @@
+import { default } from '../no-result/no-result.vue';
 <template>
   <div class="loading">
     <div class="loading-content">
@@ -5,19 +6,25 @@
         src="./loading.gif"
         width="24"
         height="24"
-        alt=""
       />
       <p class="title">{{ title }}</p>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-const title = ref('正在载入...')
-// eslint-disable-next-line
-const setTitle = function (pTitle) {
-  title.value = pTitle
+<script>
+export default {
+  name: 'loading',
+  data() {
+    return {
+      title: '正在载入...'
+    }
+  },
+  methods: {
+    setTitle(title) {
+      this.title = title
+    }
+  }
 }
 </script>
 

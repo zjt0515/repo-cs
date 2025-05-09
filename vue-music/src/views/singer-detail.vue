@@ -4,6 +4,7 @@
       :songs="songs"
       :title="title"
       :pic="pic"
+      :loading="loading"
     ></music-list>
   </div>
 </template>
@@ -21,6 +22,7 @@ const props = defineProps({
   singer: Object
 })
 const songs = ref([])
+const loading = ref(true)
 const route = useRoute()
 const router = useRouter()
 
@@ -50,8 +52,6 @@ const pic = computed(() => {
 })
 
 onMounted(async () => {
-  console.log('sginer-detail加载')
-  console.log(computedSinger.value)
   if (!computedSinger.value) {
     const path = route.matched[0].path
     router.push({ path })
@@ -59,6 +59,7 @@ onMounted(async () => {
   }
   const res = await getSingerDetail(computedSinger.value)
   songs.value = await processSongs(res.songs)
+  loading.value = false
 })
 </script>
 

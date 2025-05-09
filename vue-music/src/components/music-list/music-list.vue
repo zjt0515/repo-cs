@@ -41,6 +41,8 @@
     <Scroll
       class="list"
       :style="scrollStyle"
+      v-loading="props.loading"
+      v-no-result="noResult"
       :probe-type="3"
       @scroll="onScroll"
     >
@@ -65,7 +67,8 @@ const props = defineProps({
     }
   },
   title: String,
-  pic: String
+  pic: String,
+  loading: Boolean
 })
 
 const scrollY = ref(0)
@@ -77,6 +80,9 @@ const RESERVED_HEIGHT = 40
 // 最大滚动距离
 const maxTranslateY = ref(0)
 
+const noResult = computed(() => {
+  return !props.loading && !props.songs.length
+})
 const scrollStyle = computed(() => {
   return { top: `${imageHeight.value}px` }
 })

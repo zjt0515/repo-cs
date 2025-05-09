@@ -33,3 +33,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 下拉，图片放大，松开回弹
 
 下拉，图片逐渐模糊
+
+### 播放器
+
+1. 播放列表
+2. 播放状态
+3. 播放模式
+4. 播放歌曲
+5. 展开/收缩状态

@@ -1,7 +1,7 @@
 <template>
   <div
     class="recommand"
-    v-loading:[loadingText]="loading"
+    v-loading="loading"
   >
     <div class="slider-wrapper">
       <div class="slider-content">
@@ -18,10 +18,11 @@ import { getRecommend } from '@/service/recommend.js'
 import slider from '@/components/base/slider/slider.vue'
 import { onMounted, ref } from 'vue'
 const sliders = ref([])
-const loadingText = ref('正在载入')
+const loading = ref(true)
 onMounted(async () => {
   const result = await getRecommend()
   sliders.value = result.sliders
+  loading.value = false
 })
 </script>
 <style lang="scss" scoped></style>
