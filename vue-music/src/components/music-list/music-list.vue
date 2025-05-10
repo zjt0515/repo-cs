@@ -16,7 +16,7 @@
       :style="bgImageStyle"
       ref="bgImage"
     >
-      <!-- 播放按钮 -->
+      <!-- 随机播放按钮 -->
       <div
         class="play-btn-wrapper"
         :style="playBtnStyle"
@@ -47,7 +47,11 @@
       @scroll="onScroll"
     >
       <div class="song-list-wrapper">
-        <song-list :songs="props.songs"> </song-list>
+        <song-list
+          :songs="props.songs"
+          @select="selectSong"
+        >
+        </song-list>
       </div>
     </Scroll>
   </div>
@@ -58,6 +62,7 @@ import SongList from '@/components/base/song-list/song-list'
 import Scroll from '@/components/base/scroll/scroll'
 import { defineProps, computed, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 const props = defineProps({
   songs: {
@@ -75,6 +80,7 @@ const scrollY = ref(0)
 const imageHeight = ref(0)
 const bgImage = ref(null)
 const router = useRouter()
+const store = useStore()
 //
 const RESERVED_HEIGHT = 40
 // 最大滚动距离
@@ -121,7 +127,11 @@ const filterStyle = computed(() => {
   const currentScrollY = scrollY.value
   const currentImageHeight = imageHeight.value
   if (currentScrollY >= 0) {
-    blur = Math.min(maxTranslateY.value / currentImageHeight, currentScrollY / currentImageHeight) * 20
+    blur =
+      Math.min(
+        maxTranslateY.value / currentImageHeight,
+        currentScrollY / currentImageHeight
+      ) * 20
   }
   return {
     backdropFilter: `blur(${blur}px)`
@@ -129,7 +139,11 @@ const filterStyle = computed(() => {
 })
 
 const playBtnStyle = computed(() => {
-  return {}
+  let display = ''
+  if (scrollY.value >= maxTranslateY.value) {
+    display = 'none'
+  }
+  return { display }
 })
 
 function onScroll(pos) {
@@ -137,6 +151,12 @@ function onScroll(pos) {
 }
 function goBack() {
   router.back()
+}
+function selectSong({ song, index }) {
+   store.dispatch('selectPlay', { list: props.songs, index })
+}
+function random() {
+  store.dispatch('randomPlay', { list: props.songs })
 }
 
 onMounted(() => {

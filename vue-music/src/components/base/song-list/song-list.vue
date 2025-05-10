@@ -1,9 +1,10 @@
 <template>
   <div class="song-list">
     <ul>
+      <!-- 歌曲 -->
       <li
         class="item"
-        v-for="song in props.songs"
+        v-for="(song, index) in props.songs"
         :key="song.id"
         @click="selectSong(song, index)"
       >
@@ -34,7 +35,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['select'])
 // 点击song，触发select事件
-const selectSong = (song, index) => {
+function selectSong (song, index) {
   emit('select', { song, index })
 }
 </script>

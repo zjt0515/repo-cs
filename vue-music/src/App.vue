@@ -13,7 +13,7 @@
       <!-- </keep-alive> -->
     </transition>
   </router-view>
-  <!-- <player></player> -->
+  <player></player>
 </template>
 
 <script>
