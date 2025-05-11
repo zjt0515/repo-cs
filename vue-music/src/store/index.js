@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import { createStore, createLogger } from 'vuex'
 import state from './state'
 import * as getters from './getters'
 import mutations from './mutations'
@@ -7,5 +7,6 @@ export default createStore({
   state,
   getters,
   mutations,
-  actions
+  actions,
+  plugins: [createLogger()]
 })

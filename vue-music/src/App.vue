@@ -19,12 +19,12 @@
 <script>
 import Header from '@/components/header/header'
 import Tab from '@/components/tab/tab.vue'
-// import Player from '@/components/player/player'
+import Player from '@/components/player/player'
 // import { mapState } from 'vuex'
 
 export default {
   components: {
-    // Player,
+    Player,
     MHeader: Header,
     Tab
   },

@@ -6,29 +6,73 @@
     >
       <!-- 背景图片 -->
       <div class="background">
-        <img :src="currentSong.pic" alt="">
+        <img
+          :src="currentSong.pic"
+          alt=""
+        />
       </div>
       <!-- 顶栏 -->
       <div class="top">
-        <div class="back"></div>
+        <div
+          @click="back"
+          class="back"
+        >
+          <i class="icon-back"></i>
+        </div>
         <h1 class="title">{{ currentSong.name }}</h1>
         <h2 class="subtitle">{{ currentSong.singer }}</h2>
       </div>
+      <!-- 按钮栏 -->
+      <div class="bottom">
+        <div class="operators">
+          <div class="icon i-left">
+            <i class="icon-sequence"></i>
+          </div>
+          <div class="icon i-left">
+            <i
+              class="icon-prev"
+              @click="prev"
+            ></i>
+          </div>
+          <div class="icon i-center">
+            <i
+              :class="playIcon"
+              @click="togglePlay"
+            ></i>
+          </div>
+          <div class="icon i-right">
+            <i
+              class="icon-next"
+              @click="next"
+            ></i>
+          </div>
+          <div class="icon i-right">
+            <i class="icon-not-favorite"></i>
+          </div>
+        </div>
+      </div>
     </div>
-    <audio ref="audioRef"></audio>
+    <audio
+      @pause="pause"
+      ref="audioRef"
+    ></audio>
   </div>
 </template>
 
 <script setup>
-import { useState } from 'vuex'
+import { useStore } from 'vuex'
 import { computed, watch, ref } from 'vue'
-const store = useState()
+const store = useStore()
+const audioRef = ref(null)
 
 const fullScreen = computed(() => store.state.fullScreen)
-
 const currentSong = computed(() => store.getters.currentSong)
-
-const audioRef = ref(null)
+const currentIndex = computed(() => store.state.currentIndex)
+const playing = computed(() => store.state.playing)
+const playlist = computed(() => store.state.playlist)
+const playIcon = computed(() => {
+  return playing.value ? 'icon-pause' : 'icon-play'
+})
 
 watch(currentSong, (newSong) => {
   if (!newSong.id || !newSong.url) return
@@ -36,6 +80,46 @@ watch(currentSong, (newSong) => {
   audioEl.src = newSong.url
   audioEl.play()
 })
+
+watch(playing, (newPlaying) => {
+  const audioEl = audioRef.value
+  newPlaying ? audioEl.play() : audioEl.pause()
+})
+
+function back() {
+  store.commit('setPlayingState', false)
+  store.commit('setFullScreen', false)
+}
+
+function togglePlay() {
+  store.commit('setPlayingState', !playing.value)
+}
+
+// 处理audio被动暂停的特殊情况
+function pause() {
+  store.commit('setPlayingState', false)
+}
+
+function prev() {
+  if (currentIndex.value > 0) {
+    store.commit('setCurrentIndex', currentIndex.value - 1)
+  }
+  if (!playing.value) {
+    store.commit('setPlayingState', true)
+  }
+}
+
+function next() {
+  const list = playlist.value
+  let index = list.length + 1
+  if (index >= list.length) {
+    index = 0
+  }
+  store.commit('setCurrentIndex', index)
+  if (!playing.value) {
+    store.commit('setPlayingState', true)
+  }
+}
 </script>
 
 <style lang="scss" scoped>
