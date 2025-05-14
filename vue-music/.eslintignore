@@ -1,0 +1,5 @@
+backend/sign.js
+README.md
+dist/*
+public/*.js
+src/assets/*
