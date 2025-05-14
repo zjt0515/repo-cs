@@ -1,36 +1,33 @@
-"use strict";
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
+'use strict';
 // BANKIST APP
 
 // Data
 const account1 = {
-  owner: "Jonas Schmedtmann",
+  owner: 'Jonas Schmedtmann',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
-  pin: 1111,
+  pin: 1111
 };
 
 const account2 = {
-  owner: "Jessica Davis",
+  owner: 'Jessica Davis',
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
-  pin: 2222,
+  pin: 2222
 };
 
 const account3 = {
-  owner: "Steven Thomas Williams",
+  owner: 'Steven Thomas Williams',
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
-  pin: 3333,
+  pin: 3333
 };
 
 const account4 = {
-  owner: "Sarah Smith",
+  owner: 'Sarah Smith',
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
-  pin: 4444,
+  pin: 4444
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -60,14 +57,31 @@ const accounts = [account1, account2, account3, account4];
 // const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 // const inputCloseUsername = document.querySelector('.form__input--user');
 // const inputClosePin = document.querySelector('.form__input--pin');
+// * =================== Section: 创建数组 ===================
+{
+  const arr1 = [];
+  const arr2 = new Array(100);
+  const arr3 = Array.from({});
+  const arr4 = Array.of(100);
+  // 避免创建稀疏数组
+  Array.apply(null, Array(3));
+  [...new Array(3)];
+  Array.from(Array(3));
+}
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
+// ? 空位<1 empty item>
+{
+  // 产生empty item
+  const arr = [1, , 3];
+  delete arr[2];
+  console.log(arr);
+  arr.forEach((value, index) => {
+    console.log(value);
+  });
+}
 
-/**
- * LOOPS
- */
+// *   =================== Section: 循环 ===================
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // for(const movement of movement){
@@ -76,38 +90,90 @@ for (const [i, movement] of movements.entries()) {
 // 0:function(200)
 // 1:function|(450)
 // ...
-movements.forEach(function (movement, index, array) {});
+movements.forEach((movement, index, array) => {});
 
-// MAP
+// 批量制造数据
+// 如果不fill，map无效
+function createData() {
+  Array.from({ length: 100 })
+    .fill(null)
+    .map((value, index) => ({ name: `name${index + 1}` }));
+}
+
+// * =================== Section: Map ===================
 const currencies = new Map([
-  ["USD", "United States dollar"],
-  ["EUR", "Euro"],
-  ["GBP", "Pound sterling"],
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling']
 ]);
 
-currencies.forEach(function (value, key, map) {});
-// SET
-const currenciesUnique = new Set(["USD", "GBP", "USD", "EUR", "CNY"]);
+currencies.forEach((value, key, map) => {});
+
+// * =================== Section: Set ===================
+
+// 利用set对数组去重
+{
+  const arr1 = [1, 3, 4];
+  const arr2 = [1, 2, 3];
+  console.log(new Set([...arr1, ...arr2]));
+}
+function removeDuplicates(arr1, arr2) {}
+
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'CNY']);
 console.log(currenciesUnique);
-currenciesUnique.forEach(function (value, _, set) {
+currenciesUnique.forEach((value, _, set) => {
   console.log(`key:${key}`);
 });
 
-/////////////////////////////////////////////////
+// * =================== Section: 类数组 ===================
 
-let arr = ["a", "b", "c", "d", "e"];
+// * =================== Section: 数组方法 ===================
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// indexOf和includes
+
+console.log(arr.indexOf('b'));
+console.log(arr.includes('c'));
+
+{
+  const naNarr = [NaN];
+  console.log(naNarr.includes(NaN));
+  console.log(naNarr.indexOf(NaN));
+
+  const empArr = [,];
+  console.log(empArr);
+  console.log(empArr.includes(undefined));
+  console.log(empArr.indexOf(undefined));
+
+  const undArr = [undefined];
+  console.log(undArr.includes(undefined));
+  console.log(undArr.indexOf(undefined));
+
+  // 判断是空位还是undefined，结果为false是空位，为true是undefined
+  const empOrUndArr = [, undefined];
+  console.log(1 in empOrUndArr);
+  console.log(empOrUndArr.hasOwnProperty(1));
+}
+
+// * 数组查找方法
+{
+  // 都是短路操作
+  const arr = [1, 2, 3, 4, 5];
+  console.log(arr.some(1));
+  console.log(arr.find(1));
+  console.log(arr.findIndex(1));
+  console.log(arr.every(1));
+}
 
 // SLICE切片 提取数组的任意部分
 // slice(start?: number, end?: number)
 // 不改变原数组
-// slice(-x) 从末尾开始提取x个元素
-
 console.log(arr.slice(2)); // [ 'c', 'd', 'e' ]
 console.log(arr.slice(2, 4)); // [ 'c', 'd' ]
 console.log(arr.slice(-2)); // [ 'd', 'e' ]
 console.log(arr.slice(1, -1)); // [ 'b', 'c', 'd' ] 从1开始提取，直到末尾2个
 console.log(arr.slice()); // [ 'a', 'b', 'c', 'd', 'e' ] 无参
-console.log([...arr]); // 可以创建浅拷贝的类似方法
+console.log([...arr]); //  可以创建浅拷贝的类似方法
 
 // SPLICE拼接
 // splice(start: number, deleteCount?: number)
@@ -116,23 +182,25 @@ console.log([...arr]); // 可以创建浅拷贝的类似方法
 // console.log(arr.splice(1, 2)) // 从1开始删除2个
 console.log(arr.splice(1)); // 从1开始删除，直到结束
 // console.log(arr.splice(-1)) // 删除最后一个元素
-console.log(arr.splice(1, 0, "2", "3"));
+console.log(arr.splice(1, 0, '2', '3'));
 
 // REVERSE
-// 改变原数组
-arr = ["a", "b", "c", "d", "e"];
-const arr2 = ["j", "i", "h", "g", "f"];
-console.log(arr2.reverse());
-console.log(arr2);
+// 副作用
+{
+  arr = ['a', 'b', 'c', 'd', 'e'];
+  const arr2 = ['j', 'i', 'h', 'g', 'f'];
+  console.log(arr2.reverse());
+  console.log(arr2);
+}
 
 // CONCAT连接
-// 不改变原数组
+// 无副作用
 const letters = arr.concat(arr2);
 console.log(letters);
 console.log([...arr, ...arr2]); // 另一种方法
 
 // JOIN 利用分隔符将元素连接为string
-console.log(letters.join(" - "));
+console.log(letters.join(' - '));
 
 // AT，可以使用负数索引
 arr = [23, 11, 64];
@@ -142,3 +210,31 @@ console.log(arr.at(0));
 console.log(arr[arr.length - 1]);
 console.log(arr.at(-1));
 console.log(arr.slice(-1)[0]);
+
+// ! 副作用方法
+{
+  const arr = [1, 2, 3, 10];
+  arr.sort();
+  console.log(arr);
+  arr.sort((a, b) => a - b);
+  console.log(arr);
+}
+
+{
+  const arr = [1];
+  arr.push(2);
+  arr.push(3);
+  arr.pop();
+  console.log(arr);
+  arr.shift();
+  console.log(arr);
+  arr.unshift(1);
+  console.log(arr);
+}
+
+// * =================== Section: Array类方法 ===================
+Array.isArray;
+
+function test() {}
+
+test();

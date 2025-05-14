@@ -1,7 +1,7 @@
 <template>
-  <ClearFloat />
+  <BoxModel />
 </template>
 <script setup lang="ts">
-import ClearFloat from './components/layout/ClearFloat.vue'
+import BoxModel from './components/BoxModel.vue';
 </script>
 <style scoped></style>
