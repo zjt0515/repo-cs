@@ -28,19 +28,28 @@
           <div class="icon i-left">
             <i class="icon-sequence"></i>
           </div>
-          <div class="icon i-left">
+          <div
+            class="icon i-left"
+            :class="disableCls"
+          >
             <i
               class="icon-prev"
               @click="prev"
             ></i>
           </div>
-          <div class="icon i-center">
+          <div
+            class="icon i-center"
+            :class="disableCls"
+          >
             <i
               :class="playIcon"
               @click="togglePlay"
             ></i>
           </div>
-          <div class="icon i-right">
+          <div
+            class="icon i-right"
+            :class="disableCls"
+          >
             <i
               class="icon-next"
               @click="next"
@@ -55,6 +64,8 @@
     <audio
       @pause="pause"
       ref="audioRef"
+      @canplay="ready"
+      @error="error"
     ></audio>
   </div>
 </template>
@@ -64,6 +75,7 @@ import { useStore } from 'vuex'
 import { computed, watch, ref } from 'vue'
 const store = useStore()
 const audioRef = ref(null)
+const songReady = ref(false)
 
 const fullScreen = computed(() => store.state.fullScreen)
 const currentSong = computed(() => store.getters.currentSong)
@@ -73,15 +85,22 @@ const playlist = computed(() => store.state.playlist)
 const playIcon = computed(() => {
   return playing.value ? 'icon-pause' : 'icon-play'
 })
+const disableCls = computed(() => {
+  return songReady.value ? '' : 'disableCls'
+})
 
 watch(currentSong, (newSong) => {
   if (!newSong.id || !newSong.url) return
+  songReady.value = false
   const audioEl = audioRef.value
   audioEl.src = newSong.url
   audioEl.play()
 })
 
 watch(playing, (newPlaying) => {
+  if (!songReady.value) {
+    return
+  }
   const audioEl = audioRef.value
   newPlaying ? audioEl.play() : audioEl.pause()
 })
@@ -92,6 +111,9 @@ function back() {
 }
 
 function togglePlay() {
+  if (!songReady.value) {
+    return
+  }
   store.commit('setPlayingState', !playing.value)
 }
 
@@ -101,9 +123,16 @@ function pause() {
 }
 
 function prev() {
-  if (currentIndex.value > 0) {
-    store.commit('setCurrentIndex', currentIndex.value - 1)
+  const list = playlist.value
+  if (!songReady.value || !list.length) {
+    return
   }
+  let index = currentIndex.value - 1
+  if (currentIndex.value <= 0) {
+    index = list.length - 1
+  }
+  store.commit('setCurrentIndex', index)
+
   if (!playing.value) {
     store.commit('setPlayingState', true)
   }
@@ -111,14 +140,29 @@ function prev() {
 
 function next() {
   const list = playlist.value
-  let index = list.length + 1
+  if (!songReady.value || !list.length) {
+    return
+  }
+
+  let index = currentIndex.value + 1
   if (index >= list.length) {
     index = 0
   }
   store.commit('setCurrentIndex', index)
+
   if (!playing.value) {
     store.commit('setPlayingState', true)
   }
+}
+
+function ready() {
+  if (songReady.value) {
+    return
+  }
+  songReady.value = true
+}
+function error() {
+  songReady.value = true
 }
 </script>
 

@@ -28,3 +28,5 @@ export function randomPlay({ commit }, list) {
   commit('setPlaylist', shuffle(list))
   commit('setCurrentIndex', 0)
 }
+
+export function changeMod({ commit }) {}

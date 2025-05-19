@@ -1,14 +1,8 @@
 <template>
-  <div
-    class="recommand"
-    v-loading="loading"
-  >
+  <div class="recommand" v-loading="loading">
     <div class="slider-wrapper">
       <div class="slider-content">
-        <slider
-          v-if="sliders.length"
-          :sliders="sliders"
-        ></slider>
+        <slider v-if="sliders.length" :sliders="sliders"></slider>
       </div>
     </div>
   </div>
