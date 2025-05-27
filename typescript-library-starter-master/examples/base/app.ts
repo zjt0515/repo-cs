@@ -88,6 +88,39 @@ import axios from '../../src/index'
 
 // * =================== Section: header测试 ===================
 
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   data: {
+//     a: 1,
+//     b: 2
+//   }
+// })
+
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   headers: {
+//     'content-type': 'application/json;'
+//   },
+//   data: {
+//     a: 1,
+//     b: 2
+//   }
+// })
+
+// // xhr支持自动为USP设置对应的form Content-Type
+// // application/x-www-form-urlencoded;charset=UTF-8
+// const paramsString = 'q=URLUtils.searchParams&topic=api'
+// const searchParams = new URLSearchParams(paramsString)
+
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   data: searchParams
+// })
+
+// * =================== Section: 获取响应数据 ===================
 axios({
   method: 'post',
   url: '/base/post',
@@ -95,27 +128,18 @@ axios({
     a: 1,
     b: 2
   }
+}).then(res => {
+  console.log(res)
 })
-
+// 请求中配置responsetype为json，将json string解析为对象
 axios({
   method: 'post',
   url: '/base/post',
-  headers: {
-    'content-type': 'application/json;'
-  },
+  responseType: 'json',
   data: {
-    a: 1,
-    b: 2
+    a: 3,
+    b: 4
   }
-})
-
-// xhr支持自动为USP设置对应的form Content-Type
-// application/x-www-form-urlencoded;charset=UTF-8
-const paramsString = 'q=URLUtils.searchParams&topic=api'
-const searchParams = new URLSearchParams(paramsString)
-
-axios({
-  method: 'post',
-  url: '/base/post',
-  data: searchParams
+}).then(res => {
+  console.log(res)
 })
