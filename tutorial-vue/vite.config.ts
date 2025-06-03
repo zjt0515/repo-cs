@@ -12,4 +12,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'), // 路径别名
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/assets/scss/var.scss";
+        @import "@/assets/scss/var.scss";
+        `,
+      },
+    },
+  },
 })

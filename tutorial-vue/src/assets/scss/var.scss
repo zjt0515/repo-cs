@@ -1,0 +1,17 @@
+$green-1: #55ff55;
+
+// 主题色
+$theme-overworld: #55ff55;
+$theme-nether: #aa0000;
+$theme-end: #ffff55;
+
+$themes: (
+  theme-overworld: (),
+  theme-nether: (),
+  theme-end: (),
+) !default;
+
+// * =================== Section: test ===================
+:root {
+  --color: #fff;
+}

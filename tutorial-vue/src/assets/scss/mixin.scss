@@ -1,0 +1,11 @@
+@mixin get-bgcolor() {
+  @each $theme, $value in $themes {
+    // data-skin属性==
+    [data-skin='#{$theme}'] & {
+      background-color: map-get($theme, 'theme-color');
+    }
+  }
+}
+
+@mixin get-fontcolor() {
+}
