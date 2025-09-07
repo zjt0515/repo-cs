@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn1">获取属性</button>
+    <button id="btn2">设置属性</button>
+
+    <input value="123123" id="input" />
+    <script>
+      const btn1 = document.getElementById('btn1')
+      const btn2 = document.getElementById('btn2')
+
+      const input = document.getElementById('input')
+
+      btn1.onclick = () => {
+        alert(input.value)
+      }
+      btn2.onclick = () => {
+        input.value = '请输入文本'
+      }
+    </script>
+  </body>
+</html>

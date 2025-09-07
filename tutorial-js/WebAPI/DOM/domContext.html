@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <style contenteditable="true" style="display: block; white-space: pre">
+      .div1 {
+        border: 1px solid;
+        width: 300px;
+        height: 300px;
+      }
+    </style>
+    <div class="div1">
+      <span>我的世界1</span>
+      <div class="div2"></div>
+      <span>我的世界2</span>
+    </div>
+    <button class="btn1" onclick="getValue1()">firstChild.nodeValue</button>
+    <button class="btn2" onclick="getValue2()">innerHTML</button>
+    <button class="btn3" onclick="getValue3()">innerText</button>
+    <button class="btn4" onclick="getValue4()">textContent</button>
+    <script>
+      const div1 = document.querySelector('.div1')
+
+      // 获取文本
+      function getValue1() {
+        alert(div1.firstChild.nodeValue)
+      }
+      function getValue2() {
+        alert(div1.innerHTML)
+      }
+      function getValue3() {
+        alert(div1.innerText)
+      }
+      function getValue4() {
+        alert(div1.textContent)
+      }
+    </script>
+  </body>
+</html>

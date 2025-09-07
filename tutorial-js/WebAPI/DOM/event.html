@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="clickButton()">注册事件1</button>
+    <button id="btn2">注册事件2</button>
+    <button id="btn3">注册事件3</button>
+  </body>
+  <script>
+    function clickButton1() {
+      alert('注册事件1')
+    }
+
+    const btn2 = document.getElementById('btn2')
+    btn2.onclick = () => {
+      alert('注册事件2')
+    }
+
+    const btn3 = document.getElementById('btn3')
+    btn3.addEventListener('onclick', () => {
+      alert('注册事件3')
+    })
+  </script>
+</html>

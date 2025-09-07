@@ -43,3 +43,14 @@ console.log(lowercase.toUpperCase())
 // * =================== Section: 字符串比较 ===================
 console.log('z' > 'a')
 console.log('a' > 'Z')
+
+// * =================== Section: 类型转换 ===================
+// 基础类型转string
+// null -> "null"
+// undefined -> "undefined"
+// true -> "true"
+
+console.log(Object.prototype.toString())
+
+// array
+console.log([1, 2, 3].toString()) // "1,2,3"

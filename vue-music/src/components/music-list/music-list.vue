@@ -37,7 +37,7 @@
         :style="filterStyle"
       ></div>
     </div>
-    <!-- 歌曲滚动条 -->
+    <!-- 滚动条 -->
     <Scroll
       class="list"
       :style="scrollStyle"
@@ -50,6 +50,7 @@
         <song-list
           :songs="props.songs"
           @select="selectSong"
+          :rank="props.rank"
         >
         </song-list>
       </div>
@@ -62,7 +63,7 @@ import SongList from '@/components/base/song-list/song-list'
 import Scroll from '@/components/base/scroll/scroll'
 import { defineProps, computed, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import { useStore, mapState } from 'vuex'
 
 const props = defineProps({
   songs: {
@@ -73,7 +74,8 @@ const props = defineProps({
   },
   title: String,
   pic: String,
-  loading: Boolean
+  loading: Boolean,
+  rank: Boolean
 })
 
 const scrollY = ref(0)
@@ -86,10 +88,13 @@ const RESERVED_HEIGHT = 40
 // 最大滚动距离
 const maxTranslateY = ref(0)
 
+console.log(mapState)
+
 const noResult = computed(() => {
   return !props.loading && !props.songs.length
 })
 const scrollStyle = computed(() => {
+  // const bottom = Playlist.length?
   return { top: `${imageHeight.value}px` }
 })
 const bgImageStyle = computed(() => {
@@ -153,7 +158,7 @@ function goBack() {
   router.back()
 }
 function selectSong({ song, index }) {
-   store.dispatch('selectPlay', { list: props.songs, index })
+  store.dispatch('selectPlay', { list: props.songs, index })
 }
 function random() {
   store.dispatch('randomPlay', { list: props.songs })

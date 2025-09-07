@@ -76,11 +76,8 @@ let o: object = [1, 2, 3]
  * number string
  */
 
-/**
- * 特殊类型
- */
+// * =================== Section: 特殊类型 ===================
 // tuple
-console.log('=========tuple=========')
 let salary: [string, number, number, number] = ['zjt', 10000, 5000, 15000]
 
 // 可变tuple
@@ -91,7 +88,9 @@ let [name3, nuber1, ...rest] = salary2
 console.log(salary2[0])
 let tagedTuple: [name: string, salary1: number, salary2: number] = ['zjt', 111, 222]
 
-// nerver
+/**
+ * never
+ */
 type DataFlowType = string | number
 function useDataFlow(dataFlow: DataFlowType) {
   if (typeof dataFlow === 'string') {
@@ -109,13 +108,14 @@ function useDataFlow(dataFlow: DataFlowType) {
  * 合成类型
  */
 
-// 联合类型
+// 联合类型 A | B
 let StrOrNum: string | number = 'str'
 StrOrNum = 1
 console.log(StrOrNum)
-// 交叉类型
+
+// 交叉类型 A & B
 let obj: { username: string } & { age: number } = { username: 'zjt', age: 18 }
-console.log(obj)
+console.log(typeof obj)
 
 /**
  * 字面量数据类型

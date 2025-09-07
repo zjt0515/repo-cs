@@ -36,6 +36,25 @@
     >
       <div class="fixed-title">{{ fixedTitle }}</div>
     </div>
+    <!-- shortcut层 -->
+    <div
+      class="shortcut"
+      @touchstart.stop.prevent="onShortcutTouchStart"
+      @touchmove.stop.prevent="onShortcutTouchMove"
+      @touchend.stop.prevent="onShortcutTouchEnd"
+    >
+      <ul>
+        <li
+          v-for="(title, index) in shortcutList"
+          :data-index="index"
+          :key="title"
+          class="item"
+          :class="{ current: currentIndex === index }"
+        >
+          {{ title }}
+        </li>
+      </ul>
+    </div>
   </Scroll>
 </template>
 
@@ -43,13 +62,16 @@
 import Scroll from '@/components/base/scroll/scroll'
 import { defineProps, defineEmits } from 'vue'
 import useFixed from './use-fixed.js'
+import useShortcut from './use-shortcut.js'
 const props = defineProps({
   data: {
     type: Array,
     default: () => []
   }
 })
-const { groupRef, onScroll, fixedTitle } = useFixed(props)
+const { groupRef, onScroll, fixedTitle, currentIndex } = useFixed(props)
+const { shortcutList, onShortcutTouchStart, scrollRef, onShortcutTouchMove } =
+  useShortcut(props, groupRef)
 
 const emit = defineEmits(['select'])
 /**
@@ -60,7 +82,6 @@ const onItemClick = (singer) => {
   console.log(singer)
 }
 </script>
-
 <style scoped lang="scss">
 .index-list {
   position: relative;
@@ -104,6 +125,27 @@ const onItemClick = (singer) => {
       font-size: $font-size-small;
       color: $color-text-l;
       background: $color-highlight-background;
+    }
+  }
+  .shortcut {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    // margin-top: -50%;
+    width: 20px;
+    padding: 20px 0;
+    text-align: center;
+    background: $color-background-d;
+    font-family: Helvetica;
+    .item {
+      padding: 3px;
+      font-size: $font-size-small;
+      color: $color-text-l;
+      font-size: $font-size-small;
+      &.current {
+        color: $color-theme;
+      }
     }
   }
 }

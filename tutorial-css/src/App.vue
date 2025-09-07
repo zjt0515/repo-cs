@@ -1,7 +1,8 @@
 <template>
-  <BoxModel />
+  <HeaderMenu />
+  <RouterView />
 </template>
 <script setup lang="ts">
-import BoxModel from './components/BoxModel.vue';
+import HeaderMenu from './components/headerMenu.vue'
 </script>
 <style scoped></style>

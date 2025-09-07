@@ -1,0 +1,13 @@
+.header {
+  width: 1560px;
+  border: solid 1px black;
+  height: 100px;
+}
+.header:hover {
+  color: #2369c4;
+}
+.header::before {
+  display: block;
+  background: #1da53f;
+  width: 100px;
+}

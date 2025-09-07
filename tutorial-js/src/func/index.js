@@ -107,114 +107,22 @@ function callSum(num1, num2) {
   return sum.call()
 }
 
-// * =================== Section: this ===================
-function printThis() {
-  console.log(this)
-}
-// window
-printThis()
+// * =================== Section: IIFE立即调用的函数表达式 ===================
+// 可以用函数体模拟块级作用域
+;(function () {
+  console.log('立即被调用')
+})()
 
-let obj = {
-  printThis
-}
-// obj
-obj.printThis()
-
-//  '123'
-printThis.call('123')
-let name = 'let:name'
-const person = {
-  name: 'person\'s name',
-  getName() { return this.name }
-}
-console.log(person.getName());
-console.log((person.getName)());
-
-// * =================== Section: this绑定规则 ===================
-// 隐式绑定
-// 对象调用方法
-{
-  function printThis() {
-    console.log(this)
-  }
-  let obj1 = {
-    printThis
-  }
-  let obj2 = {
-    obj1
-  }
-  // 谁直接调用函数，this绑定的就是谁
-  obj2.obj1.printThis()
-  // 显式绑定
-  // call / bind
-  // printThis.call(window)
-  // printThis.call(obj)
-
-  const obj2printTHis = printThis.bind(obj2)
-
-  obj2printTHis()
+// * =================== Section: 函数柯里化 ===================
+// 一个多参数的函数 => 多个单参数的函数
+// 每次调用返回新函数
+function add(a, b) {
+  return a + b
 }
 
-
-
-
-// * =================== Section: 丢失this ===================
-let user = {
-  name: "John",
-  sayHi() {
-    console.log(this.name);
+function add(x) {
+  return function (y) {
+    return x + y
   }
 }
-// setTimeout的this时window，window.name不存在
-setTimeout(user.sayHi, 1000)
-// 想将一个对象方法传递到别的地方，如何确保在正确的上下文
-// 使用包装函数
-setTimeout(function () {
-  user.sayHi()
-}, 2000)
-
-// * =================== Section: 闭包 ===================
-// 嵌套函数的词法作用域规则：定义时就明确了
-let scope = 'global'
-function checkScope() {
-  let scope = 'local'
-  function f() {
-    return scope
-  }
-  // return f()
-  return f
-}
-// console.log(checkScope())
-console.log(checkScope()())
-
-// 函数定义时的作用域链到函数执行时依然有效
-
-function counter() {
-  let n = 0
-  return {
-    count: function () {
-      n++
-    },
-    reset: function () {
-      n = 0
-    },
-    get: function () {
-      return n
-    },
-  }
-}
-let c = counter(),
-  d = counter()
-c.count()
-c.count()
-c.reset()
-c.count()
-c.count()
-console.log(c.get())
-console.log(d.get())
-
-  // * =================== Section: IIFE立即调用的函数表达式 ===================
-  // 可以用函数体模拟块级作用域
-  (function () {
-    console.log("立即被调用");
-  })();
+add(1)(2)

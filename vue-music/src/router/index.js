@@ -7,7 +7,13 @@ const routes = [
   },
   {
     path: '/recommend',
-    component: () => import('@/views/recommend.vue')
+    component: () => import('@/views/recommend.vue'),
+    children: [
+      {
+        path: ':id',
+        component: () => import('@/views/album.vue')
+      }
+    ]
   },
   {
     path: '/search',
@@ -19,13 +25,19 @@ const routes = [
     children: [
       {
         path: ':id',
-        component: () => import('@/views/singer-detail.vue')
+        component: () => import('@/views/singer-detail1.vue')
       }
     ]
   },
   {
     path: '/top-list',
-    component: () => import('@/views/top-list.vue')
+    component: () => import('@/views/top-list.vue'),
+    children: [
+      {
+        path: ':id',
+        component: () => import('@/views/top-detail.vue')
+      }
+    ]
   }
 ]
 

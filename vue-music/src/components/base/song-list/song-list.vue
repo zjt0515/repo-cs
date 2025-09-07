@@ -9,7 +9,12 @@
         @click="selectSong(song, index)"
       >
         <!-- 排行榜歌单的song rank -->
-        <div class="rank"></div>
+        <div
+          class="rank"
+          v-if="props.rank"
+        >
+          <span :class="getRankCls(index)"> {{ getRankText(index) }}</span>
+        </div>
 
         <div class="content">
           <h2 class="name">{{ song.name }}</h2>
@@ -35,8 +40,20 @@ const props = defineProps({
 })
 const emit = defineEmits(['select'])
 // 点击song，触发select事件
-function selectSong (song, index) {
+function selectSong(song, index) {
   emit('select', { song, index })
+}
+
+function getRankCls(index) {
+  if (index <= 2) {
+    return `icon icon${index}`
+  } else {
+    return 'text'
+  }
+}
+
+function getRankText(index) {
+  return index > 2 ? index + 1 : 0
 }
 </script>
 

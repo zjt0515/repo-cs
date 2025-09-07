@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="sider-bar">
+        <ul class="list">
+          <li>列表1</li>
+          <li>列表2</li>
+          <li>列表3</li>
+        </ul>
+      </div>
+      <div class="header"></div>
+      <div class="content">
+        <div class="empty-text">
+          第一个Text
+          <span>第二个Text</span>
+        </div>
+      </div>
+    </div>
+    <script>
+      // * =================== Section: 通过方法获取 ===================
+      // id
+      const app = document.getElementById('app')
+
+      // className
+      const sider = document.getElementsByClassName('sider-bar')[0]
+      // console.log(getParents(sider));
+      // document.getElementsByTagName
+      // document.getElementsByName
+
+      // ! 空白节点
+      const empty = document.getElementsByClassName('empty-text')[0]
+      console.log(empty.childNodes)
+
+      const list = document.getElementsByClassName('list')
+
+      console.log(list[0].childNodes)
+      // 标签名
+      const lis = document.getElementsByTagName('li')
+      console.log(lis[0])
+
+      // * =================== Section: 主要节点获取 ===================
+      console.log('body 元素')
+      console.dir(document.body)
+      console.log('head 元素')
+      console.dir(document.head)
+
+      console.dir(document.links)
+      console.dir(document.forms)
+      // * =================== Section: 通过节点关系 ===================
+    </script>
+  </body>
+</html>
