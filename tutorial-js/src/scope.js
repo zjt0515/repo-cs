@@ -7,8 +7,14 @@ inner()
 console.log(i)
 
 // * =================== Section: let 块级===================
-for (let z = 0; z < 3; z++) {}
-console.log(z)
+for (let z = 0; z < 3; z++) {
+  console.log(z)
+}
+
+let z1 = 0
+for (; z1 < 5; z1++) {
+  console.log(z1)
+}
 // * =================== Section: var ===================
 // i 和 j都是全局作用域，全局变量
 var i = 0

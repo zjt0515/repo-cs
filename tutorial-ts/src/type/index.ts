@@ -104,6 +104,14 @@ function useDataFlow(dataFlow: DataFlowType) {
   }
 }
 
+{
+  let unknown: unknown = '2'
+  let any: any = '1'
+  let number: number = 1
+  // number = unknown
+  number = any
+}
+
 /**
  * 合成类型
  */
