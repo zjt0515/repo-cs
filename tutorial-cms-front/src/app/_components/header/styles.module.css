@@ -1,0 +1,4 @@
+@referrence "#tailwind.css"
+.header {
+  @apply flex justify-center items-center pt-6 max-h-24 flex-auto;
+}

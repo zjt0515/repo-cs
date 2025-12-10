@@ -1,0 +1,10 @@
+@reference '#tailwind.css';
+
+html.dark {
+    .container {
+        @apply bg-neutral-800/40  shadow-slate-100/30;
+    }
+}
+.container {
+  @apply bg-neutral-100/40 shadow-black/20 backdrop-blur-sm
+}

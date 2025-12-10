@@ -1,0 +1,11 @@
+/* src/app/styles/tailwind.css */
+@layer theme, base,antd, components, utilities;
+
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './tailwind/base.css';
+@import './tailwind/shadcn.css';
+@import './tailwind/theme.css';
+@import './tailwind/utilities.css';
+
+@custom-variant dark (&:is(.dark, .dark *,[data-theme=dark], [data-theme=dark] *));

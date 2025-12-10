@@ -1,0 +1,9 @@
+/* src/app/(pages)/page.module.css */
+@reference "#tailwind.css";
+
+.block {
+    @apply flex flex-col !flex-none w-full space-y-4 p-5 items-center justify-center 
+       rounded-sm backdrop-blur-sm shadow-nysm shadow-neutral-800 duration-300
+       text-lg  text-center  text-white bg-black/30 
+       hover:shadow-nylg font-lxgw;
+}

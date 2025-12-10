@@ -1,0 +1,9 @@
+import type { FC } from 'react'
+
+import { HeaderLogo } from './logo'
+import $styles from './logo.module.css'
+export const Header: FC = () => (
+  <header className={$styles.header}>
+    <HeaderLogo></HeaderLogo>
+  </header>
+)
