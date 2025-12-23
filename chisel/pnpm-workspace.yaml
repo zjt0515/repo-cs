@@ -1,0 +1,4 @@
+packages:
+  - 'packages/chisel-playground/vue2'
+  - 'packages/chisel-playground/vue3'
+  - 'packages/*'

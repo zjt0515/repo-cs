@@ -1,0 +1,6 @@
+@use 'sass:math';
+
+// vw(187.5px) -> 50vw
+@function vw($px) {
+  @return math.div($px, 375) * 100vw;
+}
