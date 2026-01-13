@@ -1,9 +1,8 @@
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
-  react: true,
     // Type of the project. 'lib' for libraries, the default is 'app'
-  type: 'app',
+  type: 'lib',
 
   // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
   // The `ignores` option in the option (first argument) is specifically treated to always be global ignores
@@ -28,7 +27,7 @@ export default antfu({
 
   // TypeScript and Vue are autodetected, you can also explicitly enable them:
   typescript: true,
-  vue: true,
+  react: true,
 
   // Disable jsonc and yaml support
   jsonc: false,

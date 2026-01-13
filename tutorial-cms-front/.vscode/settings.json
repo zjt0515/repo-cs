@@ -23,6 +23,8 @@
   "javascript.preferences.importModuleSpecifier": "shortest",
   "typescript.validate.enable": true,
   "typescript.suggest.jsdoc.generateReturns": false,
+
+  // prisma
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma",
     "editor.formatOnSave": true

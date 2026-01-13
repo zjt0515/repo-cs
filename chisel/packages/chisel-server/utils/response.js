@@ -2,6 +2,7 @@ const SUCCESS = { code: 200, message: 'success' }
 const FAIL = { code: 500, message: 'fail' }
 const VALIDATE_FAILED = { code: 400, message: 'validate faild' }
 const AUTHORIZE_FAILED = { code: 401, message: 'authorize faild' }
+const ACCESS_DENIED = {code: 403, message: 'accesss denied'}
 const API_NOT_FOUND = { code: 404, message: 'api not found' }
 
 // TODO 参数校验失败，msg中要显示什么参数，失败原因
@@ -29,6 +30,10 @@ class Response {
 
   static authorizeFailed(msg) {
     return new Response(AUTHORIZE_FAILED.code, `${AUTHORIZE_FAILED.message}: ${msg}`)
+  }
+
+  static accesssDenied() {
+    return new Response(ACCESS_DENIED.code, `${ACCESS_DENIED.message}: ${msg}`)
   }
 
   static apiNotFound() {

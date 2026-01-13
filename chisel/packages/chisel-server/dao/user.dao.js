@@ -8,14 +8,14 @@ import { daoErrorHandler } from '../utils/dao-errors.js'
 // TODO 检查sql，尤其是findOne
 export class UserDAO {
   async findOne(id) {
-    const sql = `SELECT * FROM user WHERE user_id = ?`
+    const sql = `SELECT user_id, username, role_id, disable FROM user WHERE user_id = ?`
     const params = [id].map(String)
     const result = await daoErrorHandler(() => query(sql, params))
     return result
   }
 
   async findAll(page = 1, size = 10) {
-    const sql = `SELECT * FROM user ORDER BY user_id DESC LIMIT ?,?`
+    const sql = `SELECT user_id, username, create_time FROM user ORDER BY user_id DESC LIMIT ?,?`
     const params = [(page - 1) * size, size].map(String)
     const result = await daoErrorHandler(() => query(sql, params))
     return result
@@ -64,6 +64,14 @@ export class UserDAO {
   async remove(id) {
     // 构建keys
     const sql = `DELETE FROM user where user_id = ?`
+
+    const params = [id].map(String)
+    const result = await daoErrorHandler(() => query(sql, params))
+    return result
+  }
+
+  async disable(id) {
+    const sql = `UPDATE user set disable = 1 where user_id = ?`
 
     const params = [id].map(String)
     const result = await daoErrorHandler(() => query(sql, params))
