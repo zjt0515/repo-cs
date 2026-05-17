@@ -1,9 +1,9 @@
 // src/app/_components/paginate/simple.tsx
 'use client'
+import clsx from 'clsx'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 
-// ...
 import {
   Pagination as CNPagination,
   PaginationContent,

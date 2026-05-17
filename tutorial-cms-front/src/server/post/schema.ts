@@ -1,10 +1,9 @@
 import { isNil } from 'lodash'
 import z from 'zod'
-// * =================== Section: zod-schema ===================
 /**
  * 文章查询响应数据结构
  */
-export const postItemResponseSchema = z
+export const postSchema = z
   .object({
     id: z.string(),
     title: z.string(),
@@ -22,8 +21,8 @@ export const postItemResponseSchema = z
 /**
  * 文章分页查询响应数据结构
  */
-export const postPaginateResponseSchema = z.object({
-  items: z.array(postItemResponseSchema),
+export const postPaginateSchema = z.object({
+  items: z.array(postSchema),
   meta: z.object({
     itemCount: z.coerce.number(),
     totalItems: z.coerce.number().optional(),
@@ -36,7 +35,7 @@ export const postPaginateResponseSchema = z.object({
 /**
  * 文章页面总数查询响应数据结构
  */
-export const postPageNumbersResponseSchema = z.object({
+export const postPageNumbersSchema = z.object({
   result: z.coerce.number(),
 })
 

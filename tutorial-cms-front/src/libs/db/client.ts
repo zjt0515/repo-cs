@@ -1,10 +1,19 @@
 /* eslint-disable vars-on-top */
 
-import { PrismaClient } from '@prisma/client'
+import { PrismaPg } from '@prisma/adapter-pg'
 import paginateExt from 'prisma-paginate'
 
+import { PrismaClient } from '@/database/generated/client'
+
+const connectionString = `${process.env.DATABASE_URL}`
+const adapter = new PrismaPg({ connectionString })
+
+/**
+ * 实例化prisma client
+ */
 const prismaClientSingleton = () => {
-  return new PrismaClient().$extends(paginateExt)
+  return new PrismaClient({ adapter }).$extends(paginateExt)
+  // return new PrismaClient({ adapter })
 }
 
 declare global {

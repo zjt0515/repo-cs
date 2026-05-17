@@ -40,3 +40,14 @@ export const generateLowerString = (from: string) => {
     .map((v) => trim(v, ' '))
     .join('-')
 }
+
+export function isJsonString(str: unknown): boolean {
+  if (typeof str !== 'string') return false
+  try {
+    const result = JSON.parse(str)
+    // JSON 顶层只能是 object 或 array
+    return typeof result === 'object' && result !== null
+  } catch {
+    return false
+  }
+}

@@ -3,19 +3,13 @@
     "incremental": true,
     "target": "esnext",
     "jsx": "react-jsx",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
     "allowJs": true,
@@ -52,10 +46,5 @@
     "**/*.mdx",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    "back",
-    "public"
-  ]
+  "exclude": ["node_modules", ".next", "back", "public"]
 }

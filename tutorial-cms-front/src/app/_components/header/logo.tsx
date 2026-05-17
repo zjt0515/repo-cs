@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useMemo } from 'react'
 
+import { useThemeColor } from '../theme/hooks'
 import LogoDark from './logo-dark.png'
 import LogoLight from './logo-light.png'
 import $styles from './logo.module.css'

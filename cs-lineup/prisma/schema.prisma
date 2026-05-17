@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/database/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  lineups Lineup[]
+}
+
+enum Map {
+  DUST2
+  MIRAGE
+  INFERNO
+  NUKE
+  ANCIENT
+  ANUBIS
+  OVERPASS
+  TRAIN
+}
+
+model Lineup {
+  id Int @id @default(autoincrement())
+  map Map
+  name String
+  throw_mode String
+  desc String
+  tags String
+  aimImage String
+  positionImage String
+  effectImage String
+  uploadUserId Int
+  uploadUser User @relation(fields: [uploadUserId], references: [id])
+}

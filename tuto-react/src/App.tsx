@@ -1,16 +1,15 @@
 import type { FC, ReactNode } from 'react'
 import './App.css'
-import { useState } from 'react'
-import { Button } from 'antd'
-import Page from './components/Page/Page'
+import { useLocation } from 'react-router'
 
 const App: FC = (): ReactNode => {
-  const [current, setCurrent] = useState(1)
+
+  const location = useLocation()
+  console.log(location)
+
   return (
     <>
-      <Button type='primary'>我的按钮</Button>
 
-      <Page onPageChange={(page:number) => { setCurrent(page)}} current={current} total={100} limit={20}></Page>
     </>
   )
 }

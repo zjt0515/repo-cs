@@ -5,6 +5,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  navigationMenuTriggerStyle,
 } from '../shadcn/ui/navigation-menu'
 import { cn } from '../shadcn/utils'
 import $styles from './nav.module.css'
@@ -21,11 +22,9 @@ export const HeaderNav: FC = () => (
       <NavigationMenuList>
         {items.map((item) => (
           <NavigationMenuItem key={item.href} className={cn($styles['menu-item'])}>
-            <Link href={item.href} legacyBehavior passHref>
-              <NavigationMenuLink className={cn(navigationMenuTriggerStyle())}>
-                {item.title}
-              </NavigationMenuLink>
-            </Link>
+            <NavigationMenuLink className={cn(navigationMenuTriggerStyle())}>
+              {item.title}
+            </NavigationMenuLink>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>

@@ -38,5 +38,5 @@
             z-[-1] bg-center bg-cover;
             filter: blur(30px) opacity(70%) brightness(120%);
         }
-
+    }
 }

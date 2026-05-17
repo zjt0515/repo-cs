@@ -1,11 +1,9 @@
-import type { Prisma } from '@prisma/client'
+type NonNull<T> = T extends null ? never : T
 
-type NonSkipNull<T> = T extends typeof Prisma.skip | null ? never : T
-
-interface _DeepFormItemArray<T> extends Array<DBFormData<NonSkipNull<T>>> {}
+interface _DeepFormItemArray<T> extends Array<DBFormData<NonNull<T>>> {}
 
 type _DeepFormItemObject<T> = {
-  [P in keyof T]-?: DBFormData<NonSkipNull<T[P]>>
+  [P in keyof T]-?: DBFormData<NonNull<T[P]>>
 }
 
 /**
@@ -88,4 +86,7 @@ export interface IPost {
    * 文章摘要
    */
   summary?: string
+
+  createdAt: string
+  updatedAt: string
 }

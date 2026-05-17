@@ -1,9 +1,8 @@
 'use server'
 
-import type { Post, Prisma } from '@prisma/client'
-
 import { isNil } from 'lodash'
 
+import type { Post, Prisma } from '@/database/generated/client'
 import type { PaginateOptions, PaginateReturn } from '@/libs/db/types'
 
 import db from '@/libs/db/client'
@@ -23,6 +22,7 @@ export const queryPostPaginate = async (
     limit: 8,
     ...options,
   })
+  console.log(paginateTransform(data))
   return paginateTransform(data)
 }
 

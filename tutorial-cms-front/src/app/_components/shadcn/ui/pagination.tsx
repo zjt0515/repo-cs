@@ -1,5 +1,9 @@
-import { ChevronLeft, ChevronLeftIcon, ChevronRight, ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react'
+import { isNil } from 'lodash'
+import { ChevronLeft, ChevronRight, MoreHorizontalIcon } from 'lucide-react'
+import Link from 'next/link'
 import * as React from 'react'
+
+import type { Button } from '@/app/_components/shadcn/ui/button'
 
 import { buttonVariants } from '@/app/_components/shadcn/ui/button'
 import { cn } from '@/app/_components/shadcn/utils'
@@ -32,7 +36,7 @@ type PaginationLinkProps = {
   isActive?: boolean
   disabled?: boolean
   text?: string
-} & Pick<ButtonProps, 'size'> &
+} & Pick<React.ComponentProps<typeof Button>, 'size'> &
   React.ComponentProps<'a'>
 
 // type PaginationLinkProps = {
@@ -42,10 +46,8 @@ type PaginationLinkProps = {
 
 function PaginationLink({ className, isActive, size = 'icon', ...props }: PaginationLinkProps) {
   return (
-    <a
+    <Link
       aria-current={isActive ? 'page' : undefined}
-      data-slot="pagination-link"
-      data-active={isActive}
       className={cn(
         buttonVariants({
           variant: isActive ? 'outline' : 'ghost',
@@ -53,6 +55,7 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
         }),
         className,
       )}
+      href={isNil(props.href) ? ':' : props.href}
       {...props}
     />
   )
@@ -73,15 +76,15 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
 // }
 
 const PaginationPrevious = ({
-    className,
-    text,
-    ...props
+  className,
+  text,
+  ...props
 }: React.ComponentProps<typeof PaginationLink>) => (
-    <PaginationLink {/* 属性 */}>
-        <ChevronLeft className="h-4 w-4" />
-        <span>{text ?? 'Previous'}</span>
-    </PaginationLink>
-);
+  <PaginationLink {...props}>
+    <ChevronLeft className="h-4 w-4" />
+    <span>{text ?? 'Previous'}</span>
+  </PaginationLink>
+)
 
 // function PaginationNext({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
 //   return (
@@ -98,15 +101,15 @@ const PaginationPrevious = ({
 // }
 
 const PaginationNext = ({
-    className,
-    text,
-    ...props
+  className,
+  text,
+  ...props
 }: React.ComponentProps<typeof PaginationLink>) => (
-    <PaginationLink {/* 属性 */}>
-         <span className="hidden sm:block">{text ?? 'Next'}</span>
-        <ChevronRight className="h-4 w-4" />
-    </PaginationLink>
-);
+  <PaginationLink {...props}>
+    <span className="hidden sm:block">{text ?? 'Next'}</span>
+    <ChevronRight className="h-4 w-4" />
+  </PaginationLink>
+)
 
 // function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'>) {
 //   return (
@@ -123,15 +126,15 @@ const PaginationNext = ({
 // }
 
 const PaginationEllipsis = ({
-    className,
-    text,
-    ...props
+  className,
+  text,
+  ...props
 }: React.ComponentProps<'span'> & { text?: string }) => (
-    <span>
-         <MoreHorizontalIcon className="size-4" />
-        <span className="sr-only">{text ?? 'More pages'}</span>
-    </span>
-);
+  <span {...props}>
+    <MoreHorizontalIcon className="size-4" />
+    <span className="sr-only">{text ?? 'More pages'}</span>
+  </span>
+)
 
 export {
   Pagination,

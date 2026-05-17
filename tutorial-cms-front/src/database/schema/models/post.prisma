@@ -1,12 +1,11 @@
 model Post {
-  id         String     @id @default(uuid())
-  thumb      String
-  title      String
-  summary    String?
-  body       String
-  categories Category[] @relation(references: [id])
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  id        String   @id @default(uuid())
+  thumb     String
+  title     String
+  summary   String?
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("posts")
 }
